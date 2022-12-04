@@ -11,9 +11,10 @@ import UIKit
 class NowPlayingCell: UITableViewCell {
     static let identifier = "NowPlayingCell"
     
+    weak var delegate: MainViewDelegate?
+    
     private var vm: MovieListViewModel?
     private var page = 1
-//    private var movies: [Movie]!
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -48,15 +49,6 @@ class NowPlayingCell: UITableViewCell {
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
-    
-    private func spinnerLoading() -> UIView {
-        let container = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: 100))
-        let spinner = UIActivityIndicatorView()
-        spinner.center = container.center
-        container.addSubview(spinner)
-        spinner.startAnimating()
-        return container
-    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -106,21 +98,20 @@ extension NowPlayingCell: UICollectionViewDelegate, UICollectionViewDataSource {
         
         // add movie object to cell here
         let movie = vm?.movies[indexPath.row]
-//        cell.bindViewWith(viewModel: MovieViewModel(movie: movie!))
         cell.bindViewWith(movie: movie!)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        // delegate push to details view
+        delegate?.navigate(id: (vm?.movies[indexPath.row].id)!)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let lastElement = (vm?.movies.count)! - 1
         if indexPath.row == lastElement {
             // Fetch new page
-            print("fetching now \(page)")
             page += 1
             vm?.fetchMovies(page: page)
             vm?.onFetchMovieSucceed = { [weak self] in

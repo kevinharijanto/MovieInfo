@@ -51,6 +51,8 @@ class MovieCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.text = "⭐️ 8.1"
         label.textColor = .white
+        label.backgroundColor = .movieBlue
+        label.layer.cornerRadius = 16
         return label
     }()
     
@@ -71,31 +73,19 @@ class MovieCell: UICollectionViewCell {
             
             titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor,constant: 5),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: 60),
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -10),
             
-            yearLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            yearLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            
-            ratingLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor,constant: 10),
-            ratingLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5)
+            yearLabel.topAnchor.constraint(equalTo: movieImageView.topAnchor, constant: 10),
+            yearLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+
+            ratingLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor,constant: -18),
+            ratingLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
         ])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    func bindViewWith(viewModel: MovieViewModel) {
-//        let movie = viewModel.movie
-//
-//        titleLabel.text = movie.title
-//        yearLabel.text = movie.yearText
-//        ratingLabel.text = "⭐️ \(movie.ratingText)"
-//
-//        ImageClient.shared.setImage(from: movie.posterURL, image: nil) { [weak self] image in
-//            self?.movieImageView.image = image
-//        }
-//    }
     
     func bindViewWith(movie: Movie) {
         

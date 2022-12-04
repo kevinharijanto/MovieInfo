@@ -1,15 +1,17 @@
 //
-//  UpcomingCell.swift
+//  TopRatedCell.swift
 //  MovieInfo
 //
-//  Created by Kevin Harijanto on 03/12/22.
+//  Created by Kevin Harijanto on 04/12/22.
 //
 
 import Foundation
 import UIKit
 
-class UpcomingCell: UITableViewCell {
-    static let identifier = "UpcomingCell"
+class TopRatedCell: UITableViewCell {
+    static let identifier = "TopRatedCell"
+    
+    weak var delegate: MainViewDelegate?
     
     private var vm: MovieListViewModel?
     private var page = 1
@@ -20,7 +22,7 @@ class UpcomingCell: UITableViewCell {
         label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.text = "Upcoming"
+        label.text = "Top Rated"
         label.textColor = .white
         return label
     }()
@@ -47,15 +49,6 @@ class UpcomingCell: UITableViewCell {
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
-    
-    private func spinnerLoading() -> UIView {
-        let container = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: 100))
-        let spinner = UIActivityIndicatorView()
-        spinner.center = container.center
-        container.addSubview(spinner)
-        spinner.startAnimating()
-        return container
-    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -87,7 +80,7 @@ class UpcomingCell: UITableViewCell {
     }
 }
 
-extension UpcomingCell {
+extension TopRatedCell {
     func bindViewWith(viewModel: MovieListViewModel) {
         let vm = viewModel
         self.vm = vm
@@ -95,7 +88,7 @@ extension UpcomingCell {
     }
 }
 
-extension UpcomingCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TopRatedCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return vm?.movies.count ?? 0
     }
@@ -105,21 +98,20 @@ extension UpcomingCell: UICollectionViewDelegate, UICollectionViewDataSource {
         
         // add movie object to cell here
         let movie = vm?.movies[indexPath.row]
-//        cell.bindViewWith(viewModel: MovieViewModel(movie: movie!))
         cell.bindViewWith(movie: movie!)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        // delegate push to details view
+        delegate?.navigate(id: (vm?.movies[indexPath.row].id)!)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let lastElement = (vm?.movies.count)! - 1
         if indexPath.row == lastElement {
             // Fetch new page
-            print("fetching now \(page)")
             page += 1
             vm?.fetchMovies(page: page)
             vm?.onFetchMovieSucceed = { [weak self] in

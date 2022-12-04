@@ -21,14 +21,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let nowPlayingViewModel: MovieListViewModel = NowPlayingViewModel(
             networkService: DefaultNetworkService()
         )
-        
+
         let upcomingViewModel: MovieListViewModel = UpcomingViewModel(
             networkService: DefaultNetworkService()
         )
         
-        window?.rootViewController = MainView(nowPlayingViewModel: nowPlayingViewModel,
-                                              upcomingViewModel: upcomingViewModel)
-//        window.rootViewController = MainView()
+        let topRatedViewModel: MovieListViewModel = TopRatedViewModel(
+            networkService: DefaultNetworkService()
+        )
+        
+        let detailViewModel: MovieDetailViewModel = MovieDetailDefaultViewModel(
+            networkService: DefaultNetworkService()
+        )
+        
+
+        window?.rootViewController = MainView(
+            nowPlayingViewModel: nowPlayingViewModel,
+            upcomingViewModel: upcomingViewModel,
+            topRatedViewModel: topRatedViewModel,
+            detailViewModel: detailViewModel)
         
         window?.makeKeyAndVisible()
     }
