@@ -58,6 +58,7 @@ class MainView: UITableViewController {
         tableView.register(TopRatedCell.self, forCellReuseIdentifier: TopRatedCell.identifier)
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
+        tableView.showsVerticalScrollIndicator = false
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
