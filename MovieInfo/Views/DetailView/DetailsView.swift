@@ -216,7 +216,7 @@ class DetailsView: UIViewController {
             genreLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             genreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            gradientBox.bottomAnchor.constraint(equalTo: genreLabel.topAnchor, constant: -190),
+            gradientBox.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -150),
             
             movieDurationAndRating.topAnchor.constraint(equalTo: genreLabel.bottomAnchor, constant: 10),
             movieDurationAndRating.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
