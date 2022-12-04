@@ -11,6 +11,10 @@ import UIKit
 class NowPlayingCell: UITableViewCell {
     static let identifier = "NowPlayingCell"
     
+    private var vm: MovieListViewModel?
+    private var page = 1
+//    private var movies: [Movie]!
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -24,7 +28,6 @@ class NowPlayingCell: UITableViewCell {
     
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-//        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.itemSize = CGSize(width: 150, height: 250)
         layout.minimumLineSpacing = 20
         layout.scrollDirection = .horizontal
@@ -37,12 +40,12 @@ class NowPlayingCell: UITableViewCell {
         collectionView.backgroundColor = .clear
         collectionView.contentInsetAdjustmentBehavior = .always
         
-        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
+        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCellNowPlaying")
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
@@ -57,7 +60,15 @@ class NowPlayingCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        configureView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureView() {
         backgroundColor = .clear
         
         addSubview(titleLabel)
@@ -75,20 +86,29 @@ class NowPlayingCell: UITableViewCell {
             collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
         ])
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+}
+
+extension NowPlayingCell {
+    func bindViewWith(viewModel: MovieListViewModel) {
+        let vm = viewModel
+        self.vm = vm
+        self.collectionView.reloadData()
     }
 }
 
 extension NowPlayingCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return vm?.movies.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as! MovieCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCellNowPlaying", for: indexPath) as! MovieCell
+        
         // add movie object to cell here
+        let movie = vm?.movies[indexPath.row]
+//        cell.bindViewWith(viewModel: MovieViewModel(movie: movie!))
+        cell.bindViewWith(movie: movie!)
+        
         return cell
     }
     
@@ -97,11 +117,17 @@ extension NowPlayingCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let lastElement = 4
+        let lastElement = (vm?.movies.count)! - 1
         if indexPath.row == lastElement {
-            // show spinner
-            // fetch new page
+            // Fetch new page
+            print("fetching now \(page)")
+            page += 1
+            vm?.fetchMovies(page: page)
+            vm?.onFetchMovieSucceed = { [weak self] in
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            }
         }
     }
-    
 }

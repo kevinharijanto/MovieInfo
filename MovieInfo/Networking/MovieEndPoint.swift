@@ -1,5 +1,5 @@
 //
-//  EndPoint.swift
+//  MovieEndPoint.swift
 //  MovieInfo
 //
 //  Created by Kevin Harijanto on 02/12/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MovieListEndpoint: String, CaseIterable, Identifiable {
+enum MovieEndPoint: String, CaseIterable, Identifiable {
     
     var id: String { rawValue }
     

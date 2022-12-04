@@ -7,27 +7,11 @@
 
 import Foundation
 
-struct MovieViewModel {
+final class MovieViewModel {
     
-    func fetchMovie() {
-        Service.shared.fetchMovie(id: 724495) { result in
-            switch result {
-            case .success(let response):
-                print(response.genreText)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+    var movie: Movie
     
-    func fetchAllMovies() {
-        Service.shared.fetchMovies(from: .nowPlaying) { result in
-            switch result {
-            case .success(let response):
-                print(response.results[0])
-            case .failure(let error):
-                print(error)
-            }
-        }
+    init(movie: Movie) {
+        self.movie = movie
     }
 }

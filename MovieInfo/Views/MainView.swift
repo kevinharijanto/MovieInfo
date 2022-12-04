@@ -10,8 +10,21 @@ import UIKit
 class MainView: UITableViewController {
     
     // MARK: - Properties
+    private let nowPlayingViewModel: MovieListViewModel
+    private let upcomingViewModel: MovieListViewModel
     
     // MARK: - Lifecycle
+    
+    init(nowPlayingViewModel: MovieListViewModel, upcomingViewModel: MovieListViewModel) {
+        self.nowPlayingViewModel = nowPlayingViewModel
+        self.upcomingViewModel = upcomingViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -27,6 +40,7 @@ class MainView: UITableViewController {
         tableView.register(NowPlayingCell.self, forCellReuseIdentifier: NowPlayingCell.identifier)
         tableView.register(UpcomingCell.self, forCellReuseIdentifier: UpcomingCell.identifier)
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -40,7 +54,7 @@ class MainView: UITableViewController {
 
 extension MainView {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,16 +64,22 @@ extension MainView {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section <= 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: NowPlayingCell.identifier, for: indexPath) as! NowPlayingCell
+            
+            // pass movie array
+            nowPlayingViewModel.onFetchMovieSucceed = {
+                cell.bindViewWith(viewModel: self.nowPlayingViewModel)
+            }
+            
             return cell
         }
         
-        if indexPath.section <= 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingCell.identifier, for: indexPath) as! UpcomingCell
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingCell.identifier, for: indexPath) as! UpcomingCell
+        // pass movie array
+        upcomingViewModel.onFetchMovieSucceed = {
+            cell.bindViewWith(viewModel: self.upcomingViewModel)
         }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: NowPlayingCell.identifier, for: indexPath) as! NowPlayingCell
         return cell
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

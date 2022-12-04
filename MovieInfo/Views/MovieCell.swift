@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 class MovieCell: UICollectionViewCell {
-    static let identifier = "MovieCell"
+//    static let identifier = "MovieCell"
     
     private lazy var movieImageView: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "backdrop")
+//        image.image = UIImage(named: "backdrop")
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 16
         return image
@@ -71,6 +71,7 @@ class MovieCell: UICollectionViewCell {
             
             titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor,constant: 5),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: 60),
             
             yearLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
             yearLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -82,6 +83,29 @@ class MovieCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+//    func bindViewWith(viewModel: MovieViewModel) {
+//        let movie = viewModel.movie
+//
+//        titleLabel.text = movie.title
+//        yearLabel.text = movie.yearText
+//        ratingLabel.text = "⭐️ \(movie.ratingText)"
+//
+//        ImageClient.shared.setImage(from: movie.posterURL, image: nil) { [weak self] image in
+//            self?.movieImageView.image = image
+//        }
+//    }
+    
+    func bindViewWith(movie: Movie) {
+        
+        titleLabel.text = movie.title
+        yearLabel.text = movie.yearText
+        ratingLabel.text = "⭐️ \(movie.ratingText)"
+        
+        ImageClient.shared.setImage(from: movie.posterURL, image: nil) { [weak self] image in
+            self?.movieImageView.image = image
+        }
     }
     
 }

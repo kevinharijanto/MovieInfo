@@ -15,18 +15,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = MainView()
-//        Service.shared.fetchMovie(id: 436270) { result in
-//            switch result {
-//            case .success(let response):
-//                window.rootViewController = DetailsView(movie: response)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-        self.window = window
-        window.makeKeyAndVisible()
+        window = UIWindow(windowScene: windowScene)
+        window?.windowScene = windowScene
+        
+        let nowPlayingViewModel: MovieListViewModel = NowPlayingViewModel(
+            networkService: DefaultNetworkService()
+        )
+        
+        let upcomingViewModel: MovieListViewModel = UpcomingViewModel(
+            networkService: DefaultNetworkService()
+        )
+        
+        window?.rootViewController = MainView(nowPlayingViewModel: nowPlayingViewModel,
+                                              upcomingViewModel: upcomingViewModel)
+//        window.rootViewController = MainView()
+        
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
