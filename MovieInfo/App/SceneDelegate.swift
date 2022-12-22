@@ -34,12 +34,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             networkService: DefaultNetworkService()
         )
         
+//        let view = MainView(
+//            nowPlayingViewModel: nowPlayingViewModel,
+//            upcomingViewModel: upcomingViewModel,
+//            topRatedViewModel: topRatedViewModel,
+//            detailViewModel: detailViewModel)
+        
+        let view = TestViewController()
 
-        window?.rootViewController = MainView(
-            nowPlayingViewModel: nowPlayingViewModel,
-            upcomingViewModel: upcomingViewModel,
-            topRatedViewModel: topRatedViewModel,
-            detailViewModel: detailViewModel)
+        window?.rootViewController = view
         
         window?.makeKeyAndVisible()
     }

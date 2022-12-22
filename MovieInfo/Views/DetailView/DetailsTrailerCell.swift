@@ -29,16 +29,17 @@ class DetailsTrailerCell: UITableViewCell {
         return image
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureUI()
-    }
+//    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+//        super.init(style: style, reuseIdentifier: reuseIdentifier)
+//        configureUI()
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureUI() {
+     func configureUI(movie: MovieVideo) {
+        titleLabel.text = movie.name
         self.backgroundColor = .lightMovieBlue
         
         addSubview(titleLabel)

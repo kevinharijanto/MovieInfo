@@ -271,7 +271,8 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsTrailerCell.identifier) as! DetailsTrailerCell
-        cell.bindViewWith(movie: movie.youtubeTrailers![indexPath.row])
+//        cell.bindViewWith(movie: movie.youtubeTrailers![indexPath.row])
+        cell.configureUI(movie: movie.youtubeTrailers![indexPath.row])
         return cell
     }
     
