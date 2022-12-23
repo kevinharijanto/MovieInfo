@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0E07EBE3294368AF00FA9DCB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E07EBE2294368AF00FA9DCB /* NetworkManager.swift */; };
-		0E07EBE5294371EC00FA9DCB /* MoviesResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E07EBE4294371EC00FA9DCB /* MoviesResource.swift */; };
 		0E07EBE7294372F300FA9DCB /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E07EBE6294372F300FA9DCB /* APIRequest.swift */; };
 		0E07EBE92943736F00FA9DCB /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E07EBE82943736F00FA9DCB /* NetworkRequest.swift */; };
 		0E07EBEB294373ED00FA9DCB /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E07EBEA294373ED00FA9DCB /* ViewModel.swift */; };
@@ -42,8 +41,8 @@
 		0E954B02292E14970089CCE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E954B00292E14970089CCE8 /* LaunchScreen.storyboard */; };
 		0E954B0F292E15E00089CCE8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E954B0E292E15E00089CCE8 /* MainView.swift */; };
 		0E954B192930DBE50089CCE8 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E954B182930DBE50089CCE8 /* Movie.swift */; };
-		0EA0C933295605A400319E31 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA0C932295605A400319E31 /* NetworkRequest.swift */; };
-		0EA0C9352956066800319E31 /* MoviesResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA0C9342956066800319E31 /* MoviesResource.swift */; };
+		0EFDFAB62956126C0037E685 /* MoviesResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDFAB52956126C0037E685 /* MoviesResource.swift */; };
+		0EFDFAB82956128D0037E685 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFDFAB72956128D0037E685 /* NetworkRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,8 +83,8 @@
 		0E954B03292E14970089CCE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E954B0E292E15E00089CCE8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0E954B182930DBE50089CCE8 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
-		0EA0C932295605A400319E31 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
-		0EA0C9342956066800319E31 /* MoviesResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResource.swift; sourceTree = "<group>"; };
+		0EFDFAB52956126C0037E685 /* MoviesResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResource.swift; sourceTree = "<group>"; };
+		0EFDFAB72956128D0037E685 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,13 +102,12 @@
 			isa = PBXGroup;
 			children = (
 				0E07EBE2294368AF00FA9DCB /* NetworkManager.swift */,
-				0E07EBE4294371EC00FA9DCB /* MoviesResource.swift */,
 				0E07EBE6294372F300FA9DCB /* APIRequest.swift */,
 				0E07EBE82943736F00FA9DCB /* NetworkRequest.swift */,
 				0E07EBEA294373ED00FA9DCB /* ViewModel.swift */,
 				0E07EBEC2943772500FA9DCB /* TestViewController.swift */,
-				0EA0C932295605A400319E31 /* NetworkRequest.swift */,
-				0EA0C9342956066800319E31 /* MoviesResource.swift */,
+				0EFDFAB52956126C0037E685 /* MoviesResource.swift */,
+				0EFDFAB72956128D0037E685 /* NetworkRequest.swift */,
 			);
 			path = NewNetworking;
 			sourceTree = "<group>";
@@ -180,6 +178,7 @@
 			children = (
 				0E954AF4292E14960089CCE8 /* MovieInfo */,
 				0E954AF3292E14960089CCE8 /* Products */,
+				0EFDFAB4295611590037E685 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -254,6 +253,14 @@
 				0E46675C293B292B004C6578 /* Extensions.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		0EFDFAB4295611590037E685 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				0E07EBE4294371EC00FA9DCB /* MoviesResource.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,14 +346,14 @@
 				0E466757293A5E1A004C6578 /* DetailsView.swift in Sources */,
 				0E46678A293CFCAD004C6578 /* TopRatedCell.swift in Sources */,
 				0E466759293A62F6004C6578 /* Color.swift in Sources */,
-				0E07EBE5294371EC00FA9DCB /* MoviesResource.swift in Sources */,
 				0E466755293A5481004C6578 /* MovieViewModel.swift in Sources */,
 				0E954B0F292E15E00089CCE8 /* MainView.swift in Sources */,
 				0E466770293BB2AD004C6578 /* ImageRequest.swift in Sources */,
 				0E07EBED2943772500FA9DCB /* TestViewController.swift in Sources */,
+				0EFDFAB82956128D0037E685 /* NetworkRequest.swift in Sources */,
 				0E466751293A52B7004C6578 /* MovieEndPoint.swift in Sources */,
+				0EFDFAB62956126C0037E685 /* MoviesResource.swift in Sources */,
 				0E46676E293BAF6F004C6578 /* MoviesRequest.swift in Sources */,
-				0EA0C933295605A400319E31 /* NetworkRequest.swift in Sources */,
 				0E466772293BB7B4004C6578 /* MovieRequest.swift in Sources */,
 				0E46676A293B970F004C6578 /* DataRequest.swift in Sources */,
 				0E46675D293B292B004C6578 /* Extensions.swift in Sources */,
@@ -361,7 +368,6 @@
 				0E466776293C9532004C6578 /* MovieListViewModel.swift in Sources */,
 				0E46677C293CC0C8004C6578 /* MovieDetailViewModel.swift in Sources */,
 				0E07EBE3294368AF00FA9DCB /* NetworkManager.swift in Sources */,
-				0EA0C9352956066800319E31 /* MoviesResource.swift in Sources */,
 				0E46674F293A52A8004C6578 /* MovieError.swift in Sources */,
 				0E954B192930DBE50089CCE8 /* Movie.swift in Sources */,
 				0E466774293BCCB3004C6578 /* ImageService.swift in Sources */,

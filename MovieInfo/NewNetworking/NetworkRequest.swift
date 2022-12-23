@@ -36,17 +36,17 @@ extension NetworkRequest {
                 return
             }
             
-//            do {
-//                let data2 = try JSONDecoder().decode(Movie.self, from: data)
-//                print(data2)
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-            
-            let decodedResponse = self?.decode(data)
-            DispatchQueue.main.async {
-                completion(.success(decodedResponse))
+            do {
+                let data2 = try JSONDecoder().decode(Movie.self, from: data)
+                print(data2)
+            } catch {
+                print(error.localizedDescription)
             }
+            
+//            let decodedResponse = self?.decode(data)
+//            DispatchQueue.main.async {
+//                completion(.success(decodedResponse))
+//            }
         }
         task.resume()
     }
