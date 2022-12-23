@@ -16,7 +16,7 @@ struct ViewModel {
         request.execute { result in
             switch result {
             case .success(let movie):
-                print(movie)
+                print(movie?.title)
             case .failure(let error):
                 print(error.localizedDescription)
             }
