@@ -65,7 +65,7 @@ struct Movie: Decodable, Identifiable, Hashable {
 
     var ratingText: String {
         let rating = voteAverage?.oneDigit
-        return "\(rating)"
+        return "\(rating!)"
     }
 
     var yearText: String {
