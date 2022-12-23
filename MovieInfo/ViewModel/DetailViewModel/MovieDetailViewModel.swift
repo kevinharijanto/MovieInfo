@@ -17,15 +17,15 @@ protocol MovieDetailViewModel: AnyObject {
 final class MovieDetailDefaultViewModel: MovieDetailViewModel {
     
     private let networkService: NetworkService
-    
+
     init(networkService: NetworkService) {
         self.networkService = networkService
     }
-    
+
     var movie: Movie = Movie.data[0]
     var onFetchMovieSucceed: (() -> Void)?
     var onFetchMovieFailure: ((Error) -> Void)?
-    
+
     func fetchMovie(id: Int) {
         let request = MovieRequest(id: id)
         networkService.request(request) { [weak self] result in
@@ -33,7 +33,7 @@ final class MovieDetailDefaultViewModel: MovieDetailViewModel {
             case .success(let movie):
                 self?.movie = movie
                 self?.onFetchMovieSucceed?()
-                
+
             case .failure(let error):
                 self?.onFetchMovieFailure?(error)
             }

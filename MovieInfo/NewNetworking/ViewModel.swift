@@ -10,25 +10,17 @@ import Foundation
 struct ViewModel {
     
     func fetchTopQuestions() {
-        let resource = MoviesResource(id: 500)
+        let resource = MoviesResource(id: 1990)
         let request = APIRequest(resource: resource)
         
-//        let url = resource.url
-//        let task = URLSession.shared.dataTask(with: url) { (data, _, _) -> Void in
-//            guard let data = data else {
-//                return
-//            }
-//            let wrapper = try? Utils.jsonDecoder.decode(Movie.self, from: data)
-//            print(wrapper)
-//        }
-//        task.resume()
-        
-        
-        request.execute { movie in
-            print(movie ?? "")
+        request.execute { result in
+            switch result {
+            case .success(let movie):
+                print(movie)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
-        
-        print("Beres")
     }
     
 }

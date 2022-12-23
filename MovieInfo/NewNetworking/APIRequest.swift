@@ -18,11 +18,10 @@ class APIRequest<Resource: APIResource> {
 extension APIRequest: NetworkRequest {
     // FUNGSI INI GA JALAN
     func decode(_ data: Data) -> Resource.ModelType? {
-        print("A")
         return try? Utils.jsonDecoder.decode(Resource.ModelType.self, from: data)
     }
     
-    func execute(withCompletion completion: @escaping (Resource.ModelType?) -> Void) {
+    func execute(withCompletion completion: @escaping (Result<Resource.ModelType?, MovieError>) -> Void) {
         load(resource.url, withCompletion: completion)
     }
 }
