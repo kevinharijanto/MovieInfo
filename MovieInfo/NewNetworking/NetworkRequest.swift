@@ -9,7 +9,6 @@ import Foundation
 
 protocol NetworkRequest: AnyObject {
     associatedtype ModelType: Decodable
-    func decode(_ data: Data) -> ModelType?
     func execute(withCompletion completion: @escaping (Result<ModelType?, MovieError>) -> Void)
 }
 
@@ -37,17 +36,11 @@ extension NetworkRequest {
             }
             
             do {
-                let data2 = try Utils.jsonDecoder.decode(ModelType.self, from: data)
-//                let data2 = self?.decode(data)
-                completion(.success(data2))
+                let decodedResponse = try Utils.jsonDecoder.decode(ModelType.self, from: data)
+                completion(.success(decodedResponse))
             } catch {
                 print(error.localizedDescription)
             }
-            
-//            let decodedResponse = self?.decode(data)
-//            DispatchQueue.main.async {
-//                completion(.success(decodedResponse))
-//            }
         }
         task.resume()
     }
